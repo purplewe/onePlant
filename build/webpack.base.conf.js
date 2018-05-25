@@ -4,7 +4,7 @@ const utils = require('./utils')
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const vuxLoader = require('vux-loader')
-function resolve (dir) {
+function resolve(dir) {
   return path.join(__dirname, '..', dir)
 }
 
@@ -29,7 +29,7 @@ let webpackConfig = {
   },
   module: {
     rules: [
-      ...(config.dev.useEslint? [{
+      ...(config.dev.useEslint ? [{
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
@@ -39,6 +39,11 @@ let webpackConfig = {
           emitWarning: !config.dev.showEslintErrorsInOverlay
         }
       }] : []),
+      {
+        test: /\.less$/,
+        loader: "style-loader!css-loader!less-loader",
+
+      },
       {
         test: /\.vue$/,
         loader: 'vue-loader',
@@ -85,7 +90,7 @@ module.exports = vuxLoader.merge(webpackConfig, {
     {
       name: 'duplicate-style',
       options: {
-        cssProcessorOptions : {
+        cssProcessorOptions: {
           safe: true,
           zindex: false,
           autoprefixer: {
@@ -97,6 +102,10 @@ module.exports = vuxLoader.merge(webpackConfig, {
           }
         }
       }
+    },
+    {
+      name: 'less-theme',
+      path: 'src/styles/theme.less' // 相对项目根目录路径
     }
   ]
 })
