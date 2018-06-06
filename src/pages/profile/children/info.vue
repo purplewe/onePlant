@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container">
         <x-head></x-head>
         <section class="info">
             <blur class="blurBg" :height="160" :blur-amount=10 :url="picUrl">
@@ -9,7 +9,7 @@
                 <span>{{username}}</span>
             </div>
             <div class="editeProfile">
-                <x-button mini plain type="primary" link="/info/editeInfo">编辑个人资料</x-button>
+                <x-button mini plain type="primary" link="/editeInfo">编辑个人资料</x-button>
             </div>
             <group class="someDetail">
                 <cell :title="profileDetail" link>
@@ -34,9 +34,6 @@
                 </cell>
             </group>
         </section>
-         <transition name="router-slid" mode="out-in">
-            <router-view class="children-view"></router-view>
-         </transition>
     </div>
 </template>
 <script>
@@ -63,26 +60,23 @@ export default {
   methods: {
     toEditeInfo() {
       console.log("here");
-      this.$router.push({ path: "/info/editeInfo" });
+      this.$router.push({ path: "/editeInfo" });
     }
   }
 };
 </script>
 
-<style scoped>
-.children-view {
+<style type="less" scoped>
+@import "../../../styles/theme.less";
+
+.container {
   position: absolute;
-  width: 100%;
-  transition: all 0.8s cubic-bezier(0.55, 0, 0.1, 1);
-}
-.router-slid-enter-active,
-.router-slid-leave-active {
-  transition: all 0.4s;
-}
-.router-slid-enter,
-.router-slid-leave-active {
-  transform: translate3d(2rem, 0, 0);
-  opacity: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #f2f2f2;
+  z-index: 202;
 }
 .followers span {
   margin-left: 5px;
@@ -119,7 +113,7 @@ export default {
   border-radius: 50%;
   border: 2px solid #ececec;
 }
-.info{
-    margin-top: -25.6px;
+.info {
+  margin-top: -44px;
 }
 </style>
